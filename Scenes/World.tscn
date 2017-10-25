@@ -1,0 +1,686 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://Sprites/tile.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/globalLightMask.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/icon.png" type="Texture" id=4]
+[ext_resource path="res://Torch/Torch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Wall/Wall.tscn" type="PackedScene" id=6]
+
+[sub_resource type="CapsuleShape2D" id=6]
+
+custom_solver_bias = 0.0
+radius = 16.0
+height = 0.1
+
+[node name="World" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+
+visibility/behind_parent = true
+transform/pos = Vector2( 592, 400 )
+transform/scale = Vector2( 0.763216, 0.763216 )
+z/z = -1000
+z/relative = false
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 0, 0, 3840, 2040 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GlobalLight" type="Light2D" parent="."]
+
+enabled = true
+editor_only = false
+texture = ExtResource( 2 )
+offset = Vector2( 0, 0 )
+scale = 100.0
+color = Color( 1, 1, 1, 1 )
+energy = 1.0
+mode = 1
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = 0
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = false
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" type="KinematicBody2D" parent="." groups=[
+"player",
+"living",
+]]
+
+transform/pos = Vector2( 48, 576 )
+input/pickable = false
+shapes/0/shape = SubResource( 6 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Player"]
+
+transform/scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+
+shape = SubResource( 6 )
+trigger = false
+_update_shape_index = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 0.6, 0.6 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = true
+smoothing/speed = 3.0
+drag_margin/left = 0.05
+drag_margin/top = 0.05
+drag_margin/right = 0.05
+drag_margin/bottom = 0.05
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TorchPos" type="Position2D" parent="Player"]
+
+transform/pos = Vector2( 11, -12 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Torch" parent="." instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 128, 576 )
+gravity_distance_scale = 0.242
+
+[node name="Walls" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Wall" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 16, 528 )
+
+[node name="Wall5 4" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 176, 528 )
+
+[node name="Wall55" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 336, 528 )
+
+[node name="Wall1" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 48, 528 )
+
+[node name="Wall5" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 208, 528 )
+
+[node name="Wall6" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 368, 528 )
+
+[node name="Wall2" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 80, 528 )
+
+[node name="Wall5 3" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 240, 528 )
+
+[node name="Wall54" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 400, 528 )
+
+[node name="Wall3" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 112, 528 )
+
+[node name="Wall5 2" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 272, 528 )
+
+[node name="Wall53" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 432, 528 )
+
+[node name="Wall4" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 144, 528 )
+
+[node name="Wall5 5" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 304, 528 )
+
+[node name="Wall56" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 464, 528 )
+
+[node name="OuterWalls 2" type="Node2D" parent="."]
+
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Wall7" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 16, 624 )
+
+[node name="Wall8" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 496, 624 )
+
+[node name="Wall57 8" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 176, 624 )
+
+[node name="Wall579" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 656, 624 )
+
+[node name="Wall57" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 336, 624 )
+
+[node name="Wall58" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 816, 624 )
+
+[node name="Wall7 4" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 48, 624 )
+
+[node name="Wall75" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 528, 624 )
+
+[node name="Wall7 2" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 208, 624 )
+
+[node name="Wall73" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 688, 624 )
+
+[node name="Wall7 3" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 368, 624 )
+
+[node name="Wall74" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 848, 624 )
+
+[node name="Wall7 5" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 80, 624 )
+
+[node name="Wall76" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 560, 624 )
+
+[node name="Wall57 3" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 240, 624 )
+
+[node name="Wall574" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 720, 624 )
+
+[node name="Wall57 2" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 400, 624 )
+
+[node name="Wall573" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 880, 624 )
+
+[node name="Wall7 7" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 112, 624 )
+
+[node name="Wall78" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 592, 624 )
+
+[node name="Wall57 7" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 272, 624 )
+
+[node name="Wall578" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 752, 624 )
+
+[node name="Wall57 4" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 432, 624 )
+
+[node name="Wall575" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 912, 624 )
+
+[node name="Wall7 6" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 144, 624 )
+
+[node name="Wall77" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 624, 624 )
+
+[node name="Wall57 6" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 304, 624 )
+
+[node name="Wall577" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 784, 624 )
+
+[node name="Wall57 5" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 464, 624 )
+
+[node name="Wall576" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 944, 624 )
+
+[node name="Wall580" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 976, 624 )
+
+[node name="Wall581" parent="OuterWalls 2" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 1008, 624 )
+
+[node name="OuterWalls4" type="Node2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 1024, 608 )
+transform/rot = 180.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Wall7" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 16, 624 )
+
+[node name="Wall8" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 496, 624 )
+
+[node name="Wall57 8" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 176, 624 )
+
+[node name="Wall579" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 656, 624 )
+
+[node name="Wall57" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 336, 624 )
+
+[node name="Wall58" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 816, 624 )
+
+[node name="Wall7 4" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 48, 624 )
+
+[node name="Wall75" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 528, 624 )
+
+[node name="Wall7 2" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 208, 624 )
+
+[node name="Wall73" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 688, 624 )
+
+[node name="Wall7 3" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 368, 624 )
+
+[node name="Wall74" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 848, 624 )
+
+[node name="Wall7 5" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 80, 624 )
+
+[node name="Wall76" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 560, 624 )
+
+[node name="Wall57 3" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 240, 624 )
+
+[node name="Wall574" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 720, 624 )
+
+[node name="Wall57 2" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 400, 624 )
+
+[node name="Wall573" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 880, 624 )
+
+[node name="Wall7 7" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 112, 624 )
+
+[node name="Wall78" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 592, 624 )
+
+[node name="Wall57 7" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 272, 624 )
+
+[node name="Wall578" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 752, 624 )
+
+[node name="Wall57 4" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 432, 624 )
+
+[node name="Wall575" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 912, 624 )
+
+[node name="Wall7 6" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 144, 624 )
+
+[node name="Wall77" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 624, 624 )
+
+[node name="Wall57 6" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 304, 624 )
+
+[node name="Wall577" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 784, 624 )
+
+[node name="Wall57 5" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 464, 624 )
+
+[node name="Wall576" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 944, 624 )
+
+[node name="Wall580" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 976, 624 )
+
+[node name="Wall581" parent="OuterWalls4" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 1008, 624 )
+
+[node name="OuterWalls3" type="Node2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 416, 640 )
+transform/rot = 90.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Wall7" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 16, 624 )
+transform/rot = 90.0
+
+[node name="Wall8" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 496, 624 )
+transform/rot = 90.0
+
+[node name="Wall57 8" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 176, 624 )
+transform/rot = 90.0
+
+[node name="Wall579" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 656, 624 )
+transform/rot = 90.0
+
+[node name="Wall57" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 336, 624 )
+transform/rot = 90.0
+
+[node name="Wall7 4" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 48, 624 )
+transform/rot = 90.0
+
+[node name="Wall75" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 528, 624 )
+transform/rot = 90.0
+
+[node name="Wall7 2" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 208, 624 )
+transform/rot = 90.0
+
+[node name="Wall7 3" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 368, 624 )
+transform/rot = 90.0
+
+[node name="Wall7 5" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 80, 624 )
+transform/rot = 90.0
+
+[node name="Wall76" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 560, 624 )
+transform/rot = 90.0
+
+[node name="Wall57 3" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 240, 624 )
+transform/rot = 90.0
+
+[node name="Wall57 2" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 400, 624 )
+transform/rot = 90.0
+
+[node name="Wall7 7" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 112, 624 )
+transform/rot = 90.0
+
+[node name="Wall78" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 592, 624 )
+transform/rot = 90.0
+
+[node name="Wall57 7" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 272, 624 )
+transform/rot = 90.0
+
+[node name="Wall57 4" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 432, 624 )
+transform/rot = 90.0
+
+[node name="Wall7 6" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 144, 624 )
+transform/rot = 90.0
+
+[node name="Wall77" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 624, 624 )
+transform/rot = 90.0
+
+[node name="Wall57 6" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 304, 624 )
+transform/rot = 90.0
+
+[node name="Wall57 5" parent="OuterWalls3" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 464, 624 )
+transform/rot = 90.0
+
+[node name="OuterWalls5" type="Node2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( -640, 640 )
+transform/rot = 90.0
+
+[node name="Wall7" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 16, 624 )
+transform/rot = -90.0
+
+[node name="Wall8" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 496, 624 )
+transform/rot = -90.0
+
+[node name="Wall57 8" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 176, 624 )
+transform/rot = -90.0
+
+[node name="Wall579" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 656, 624 )
+transform/rot = -90.0
+
+[node name="Wall57" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 336, 624 )
+transform/rot = -90.0
+
+[node name="Wall7 4" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 48, 624 )
+transform/rot = -90.0
+
+[node name="Wall75" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 528, 624 )
+transform/rot = -90.0
+
+[node name="Wall7 2" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 208, 624 )
+transform/rot = -90.0
+
+[node name="Wall7 3" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 368, 624 )
+transform/rot = -90.0
+
+[node name="Wall7 5" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 80, 624 )
+transform/rot = -90.0
+
+[node name="Wall76" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 560, 624 )
+transform/rot = -90.0
+
+[node name="Wall57 3" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 240, 624 )
+transform/rot = -90.0
+
+[node name="Wall57 2" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 400, 624 )
+transform/rot = -90.0
+
+[node name="Wall7 7" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 112, 624 )
+transform/rot = -90.0
+
+[node name="Wall78" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 592, 624 )
+transform/rot = -90.0
+
+[node name="Wall57 7" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 272, 624 )
+transform/rot = -90.0
+
+[node name="Wall57 4" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 432, 624 )
+transform/rot = -90.0
+
+[node name="Wall7 6" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 144, 624 )
+transform/rot = -90.0
+
+[node name="Wall77" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 624, 624 )
+transform/rot = -90.0
+
+[node name="Wall57 6" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 304, 624 )
+transform/rot = -90.0
+
+[node name="Wall57 5" parent="OuterWalls5" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 464, 624 )
+transform/rot = -90.0
+
+[connection signal="body_enter" from="Torch" to="Player" method="pickUpTorch"]
+
+
