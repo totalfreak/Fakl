@@ -7,7 +7,7 @@
 [ext_resource path="res://Torch/Torch.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Wall/Wall.tscn" type="PackedScene" id=6]
 
-[sub_resource type="CapsuleShape2D" id=6]
+[sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 16.0
@@ -55,13 +55,13 @@ __meta__ = {
 }
 
 [node name="Player" type="KinematicBody2D" parent="." groups=[
-"player",
 "living",
+"player",
 ]]
 
 transform/pos = Vector2( 48, 576 )
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -79,7 +79,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 
-shape = SubResource( 6 )
+shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 __meta__ = {

@@ -10,7 +10,7 @@ extents = Vector2( 16, 16 )
 [sub_resource type="OccluderPolygon2D" id=2]
 
 closed = true
-cull_mode = 0
+cull_mode = 2
 polygon = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
 
 [node name="Wall" type="StaticBody2D" groups=[
@@ -31,7 +31,7 @@ bounce = 0.0
 
 [node name="Sprite" type="Sprite" parent="."]
 
-visibility/self_opacity = 0.2
+visibility/self_opacity = 0.3
 visibility/blend_mode = 1
 transform/scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
@@ -54,8 +54,9 @@ __meta__ = {
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 
 visibility/behind_parent = true
+visibility/light_mask = 524289
 occluder = SubResource( 2 )
-light_mask = 1
+light_mask = 524289
 __meta__ = {
 "_edit_lock_": true
 }

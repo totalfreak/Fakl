@@ -12,8 +12,8 @@ extents = Vector2( 4, 12 )
 
 [sub_resource type="ColorRamp" id=2]
 
-offsets = FloatArray( 0, 0.467836, 1 )
-colors = ColorArray( 0.859375, 0.3936, 0.0537109, 1, 0.941406, 0.678676, 0.371414, 1, 0.460938, 0.45721, 0.451935, 1 )
+offsets = FloatArray( 0, 0.245614, 0.602339, 1 )
+colors = ColorArray( 0.492444, 0.471732, 0.446655, 1, 0.460938, 0.45721, 0.451935, 1, 0.941406, 0.678676, 0.371414, 1, 0.859375, 0.3936, 0.0537109, 1 )
 
 [node name="Torch" type="Area2D" groups=[
 "torch",
@@ -79,6 +79,7 @@ __meta__ = {
 [node name="Particles2D" type="Particles2D" parent="."]
 
 visibility/behind_parent = true
+visibility/blend_mode = 1
 transform/pos = Vector2( 0, -8 )
 transform/rot = 180.0
 transform/scale = Vector2( 0.5, 0.5 )
@@ -89,12 +90,12 @@ config/texture = ExtResource( 4 )
 params/direction = 0.0
 params/spread = 10.0
 params/linear_velocity = 20.0
-params/spin_velocity = 0.0
+params/spin_velocity = 1.0
 params/orbit_velocity = 0.0
 params/gravity_direction = 0.0
 params/gravity_strength = 9.8
 params/radial_accel = 0.0
-params/tangential_accel = 0.0
+params/tangential_accel = 3.0
 params/damping = 0.0
 params/initial_angle = 0.0
 params/initial_size = 1.0
@@ -102,7 +103,9 @@ params/final_size = 0.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
-color/color = Color( 0.886719, 0.654323, 0.103912, 1 )
+randomness/spin_velocity = 1.0
+randomness/final_size = 0.36
+color/color = Color( 0.929688, 0.661233, 0.0254211, 1 )
 color/color_ramp = SubResource( 2 )
 
 
