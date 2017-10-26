@@ -41,7 +41,7 @@ func _fixed_process(delta):
 		torch.get_node("Particles2D").set_lifetime(fuel)
 
 	#Shooting
-	if Input.is_mouse_button_pressed(1) and hasTorch and !hasShot and fuel >= 0.5:
+	if Input.is_action_pressed("shoot") and hasTorch and !hasShot and fuel >= 0.5:
 		shoot()
 	
 	#Reseting velocity
@@ -79,7 +79,7 @@ func _input(event):
 	if event.type == InputEvent.KEY and event.is_pressed() and Input.is_action_pressed("torch_toggle"):
 		if hasTorch:
 			dropTorch()
-		else:
+		elif get_pos().distance_to(torch.get_pos()) < 15:
 			pickUpTorch()
 
 
