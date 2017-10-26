@@ -10,11 +10,13 @@ var downTorchPos = Vector2(-12, 11)
 var leftTorchPos = Vector2(-12, -11)
 var rightTorchPos = Vector2(11, -12)
 
-var shootSpeed = 300
+var shootSpeed = 350
 
 var hasTorch = false
+var hasShot = false
 var torchPos
 var torchScene
+onready var timer = Timer.new()
 
 const MOVE_SPEED = 40
 const RUN_MULT = 2
@@ -24,11 +26,13 @@ func _ready():
 	#preload the torch
 	torchScene = preload("res://Torch/Torch.tscn")
 	torchPos = get_node("TorchPos")
-	pass
+	timer.connect("timeout",self,"_on_timer_timeout")
+	add_child(timer)
+	timer.start()
 
 func _fixed_process(delta):
 	#Shooting
-	if Input.is_mouse_button_pressed(1) and hasTorch:
+	if Input.is_mouse_button_pressed(1) and hasTorch and !hasShot:
 		shoot()
 	
 	#Reseting velocity
@@ -79,8 +83,12 @@ func shoot():
 	var bullet_rot = get_angle_to(get_global_mouse_pos()) + bullet.get_rot()
 	bullet.set_rot(bullet_rot)
 	bullet.set_pos(torchPos.get_global_pos())
-	var rigidbody_vector = (get_global_mouse_pos() - self.get_pos()).normalized()
+	var rigidbody_vector = (get_global_mouse_pos() - torchPos.get_global_pos()).normalized()
 	bullet.apply_impulse(bullet.get_pos(), rigidbody_vector*shootSpeed)
-	#print(rigidbody_vector)
-	#self.apply_impulse(self.get_pos(), -rigidbody_vector*10)
-	#self.set_linear_velocity(Vector2(-rigidbody_vector.x*100, -rigidbody_vector.y*100))
+	hasShot = true
+	timer.set_wait_time( 1 )
+	timer.start()
+
+
+func _on_timer_timeout():
+	hasShot = false
