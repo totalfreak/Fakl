@@ -9,6 +9,7 @@ func _ready():
 	set_fixed_process(true)
 
 func _fixed_process(delta):
+	
 	var rand = rand_range(1, 10)
 	rand = round(rand)
 	if rand == 3:

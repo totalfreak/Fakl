@@ -11,7 +11,7 @@ var leftTorchPos = Vector2(-12, -11)
 var rightTorchPos = Vector2(11, -12)
 
 var shootSpeed = 350
-var fuel = 1.0
+var fuel
 
 var hasTorch = false
 var hasShot = false
@@ -35,13 +35,14 @@ func _ready():
 func _fixed_process(delta):
 	
 	if hasTorch:
-		torch.fuel = fuel
+		fuel = torch.fuel
 		torch.get_node("Particles2D").set_param(11, fuel/2)
-		if fuel < 0.1:
+		torch.get_node("Particles2D").set_lifetime(fuel)
+		if fuel <= 0.5:
 			torch.get_node("Particles2D").set_param(11, 0.0)
-			dropTorch()
+			#dropTorch()
 	#Shooting
-	if Input.is_mouse_button_pressed(1) and hasTorch and !hasShot and fuel >= 0.1:
+	if Input.is_mouse_button_pressed(1) and hasTorch and !hasShot and fuel >= 0.5:
 		shoot()
 	
 	#Reseting velocity
@@ -86,8 +87,8 @@ func pickUpTorch( body ):
 
 
 func shoot():
-	fuel -= 0.1
-	if fuel <= 0:
+	torch.fuel -= 0.1
+	if torch.fuel <= 0.3:
 		dropTorch()
 	var bullet = load("res://Projectile/Bullet.tscn").instance()
 	bullet.get_node("Particles2D").set_param(11, fuel/2.0)
@@ -109,4 +110,5 @@ func _on_timer_timeout():
 func dropTorch():
 	torchPos.remove_child(torch)
 	self.get_parent().add_child(torch)
+	torch.set_pos(torchPos.get_global_pos())
 	hasTorch = false
