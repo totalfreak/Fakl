@@ -25,8 +25,9 @@ const RUN_MULT = 2
 
 func _ready():
 	set_fixed_process(true)
-	#preload the torch
-	torchScene = preload("res://Torch/Torch.tscn")
+	set_process_input(true)
+	
+	torch = get_parent().get_node("Torch")
 	torchPos = get_node("TorchPos")
 	timer.connect("timeout",self,"_on_timer_timeout")
 	add_child(timer)
@@ -38,9 +39,7 @@ func _fixed_process(delta):
 		fuel = torch.fuel
 		torch.get_node("Particles2D").set_param(11, fuel/2)
 		torch.get_node("Particles2D").set_lifetime(fuel)
-		if fuel <= 0.5:
-			torch.get_node("Particles2D").set_param(11, 0.0)
-			#dropTorch()
+
 	#Shooting
 	if Input.is_mouse_button_pressed(1) and hasTorch and !hasShot and fuel >= 0.5:
 		shoot()
@@ -51,10 +50,10 @@ func _fixed_process(delta):
 	#Moving left and right
 	if Input.is_action_pressed("move_left"):
 		velocity += left
-		torchPos.set_pos(leftTorchPos)
+		torchPos.set_pos(leftTorchPos/2)
 	elif Input.is_action_pressed("move_right"):
 		velocity += right
-		torchPos.set_pos(rightTorchPos)
+		torchPos.set_pos(rightTorchPos/2)
 	
 	#Moving up and down
 	if Input.is_action_pressed("move_up"):
@@ -76,14 +75,12 @@ func _fixed_process(delta):
 		move(motion)
 
 
-func pickUpTorch( body ):
-	var otherTorch = get_parent().get_node("Torch")
-	otherTorch.set_scale(Vector2(0,0))
-	otherTorch.queue_free()
-	torch = torchScene.instance()
-	torch.set_pos(Vector2(0,0))
-	torchPos.add_child(torch)
-	hasTorch = true
+func _input(event):
+	if event.type == InputEvent.KEY and event.is_pressed() and Input.is_action_pressed("torch_toggle"):
+		if hasTorch:
+			dropTorch()
+		else:
+			pickUpTorch()
 
 
 func shoot():
@@ -106,9 +103,10 @@ func shoot():
 func _on_timer_timeout():
 	hasShot = false
 
+func pickUpTorch():
+	torch.pickedUp = true
+	hasTorch = true
 
 func dropTorch():
-	torchPos.remove_child(torch)
-	self.get_parent().add_child(torch)
-	torch.set_pos(torchPos.get_global_pos())
+	torch.pickedUp = false
 	hasTorch = false
