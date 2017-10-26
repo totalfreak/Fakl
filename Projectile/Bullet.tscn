@@ -61,6 +61,7 @@ light_mask = 1
 [node name="Particles2D" type="Particles2D" parent="."]
 
 visibility/light_mask = 3
+transform/scale = Vector2( 2, 2 )
 config/amount = 50
 config/lifetime = 0.5
 config/process_mode = 1
@@ -97,7 +98,7 @@ texture = ExtResource( 3 )
 offset = Vector2( 1.5, 1.5 )
 scale = 0.3
 color = Color( 1, 0.916687, 0.695312, 1 )
-energy = 0.5
+energy = 1.0
 mode = 0
 range/height = 100.0
 range/z_min = -1024

@@ -11,11 +11,13 @@ var leftTorchPos = Vector2(-12, -11)
 var rightTorchPos = Vector2(11, -12)
 
 var shootSpeed = 350
+var fuel = 1.0
 
 var hasTorch = false
 var hasShot = false
 var torchPos
 var torchScene
+var torch
 onready var timer = Timer.new()
 
 const MOVE_SPEED = 40
@@ -31,8 +33,15 @@ func _ready():
 	timer.start()
 
 func _fixed_process(delta):
+	
+	if hasTorch:
+		torch.fuel = fuel
+		torch.get_node("Particles2D").set_param(11, fuel/2)
+		if fuel < 0.1:
+			torch.get_node("Particles2D").set_param(11, 0.0)
+			dropTorch()
 	#Shooting
-	if Input.is_mouse_button_pressed(1) and hasTorch and !hasShot:
+	if Input.is_mouse_button_pressed(1) and hasTorch and !hasShot and fuel >= 0.1:
 		shoot()
 	
 	#Reseting velocity
@@ -70,14 +79,18 @@ func pickUpTorch( body ):
 	var otherTorch = get_parent().get_node("Torch")
 	otherTorch.set_scale(Vector2(0,0))
 	otherTorch.queue_free()
-	var torch = torchScene.instance()
+	torch = torchScene.instance()
 	torch.set_pos(Vector2(0,0))
 	torchPos.add_child(torch)
 	hasTorch = true
 
 
 func shoot():
+	fuel -= 0.1
+	if fuel <= 0:
+		dropTorch()
 	var bullet = load("res://Projectile/Bullet.tscn").instance()
+	bullet.get_node("Particles2D").set_param(11, fuel/2.0)
 	#var bi = bullet.instance()
 	get_parent().add_child(bullet)
 	var bullet_rot = get_angle_to(get_global_mouse_pos()) + bullet.get_rot()
@@ -89,6 +102,11 @@ func shoot():
 	timer.set_wait_time( 1 )
 	timer.start()
 
-
 func _on_timer_timeout():
 	hasShot = false
+
+
+func dropTorch():
+	torchPos.remove_child(torch)
+	self.get_parent().add_child(torch)
+	hasTorch = false
