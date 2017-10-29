@@ -37,9 +37,7 @@ func _fixed_process(delta):
 	
 	if hasTorch:
 		fuel = torch.fuel
-		torch.get_node("Particles2D").set_param(11, fuel/2)
-		torch.get_node("Particles2D").set_lifetime(fuel)
-
+	
 	#Shooting
 	if Input.is_action_pressed("shoot") and hasTorch and !hasShot and fuel >= 0.5:
 		shoot()
@@ -104,9 +102,11 @@ func _on_timer_timeout():
 	hasShot = false
 
 func pickUpTorch():
+	get_node("Light2D").set_texture_scale(0)
 	torch.pickedUp = true
 	hasTorch = true
 
 func dropTorch():
+	get_node("Light2D").set_texture_scale(0.4)
 	torch.pickedUp = false
 	hasTorch = false
