@@ -1,8 +1,6 @@
 extends RigidBody2D
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+const dmg = 2
 
 func _ready():
 	set_process(true)
@@ -12,4 +10,7 @@ func _process(delta):
 	
 	for body in bodies:
 		if body.is_in_group("wall"):
-			self.free()
+			self.queue_free()
+		elif body.is_in_group("evil"):
+			body.damage(dmg)
+			self.queue_free()

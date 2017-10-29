@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="TileSet" subresource_count="6" version="2.1" version_name="Godot Engine v2.1.4.stable.custom_build">
+	<ext_resource path="res://Sprites/brickWall1.png" type="Texture" index="0"></ext_resource>
+	<ext_resource path="res://Sprites/tileBlock.png" type="Texture" index="1"></ext_resource>
+	<resource type="OccluderPolygon2D" path="local://2">
+		<bool name="closed"> True </bool>
+		<int name="cull_mode"> 0 </int>
+		<vector2_array name="polygon" len="4"> 			-16, -16, 16, -16, 16, 16, -16, 16 </vector2_array>
+
+	</resource>
+	<resource type="RectangleShape2D" path="local://3">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2 name="extents"> 16, 16 </vector2>
+
+	</resource>
+	<resource type="NavigationPolygon" path="local://1">
+		<vector2_array name="vertices" len="4"> 			-16, -16, 16, -16, 16, 16, -16, 16 </vector2_array>
+		<array name="polygons" len="1" shared="false">
+			<int_array  len="4"> 				0, 1, 2, 3 </int_array>
+		</array>
+		<array name="outlines" len="1" shared="false">
+			<vector2_array  len="4"> 				-16, -16, 16, -16, 16, 16, -16, 16 </vector2_array>
+		</array>
+
+	</resource>
+	<main_resource>
+		<string name="0/name"> "brickWall1" </string>
+		<resource name="0/texture" external="0">  </resource>
+		<vector2 name="0/tex_offset"> 0, 0 </vector2>
+		<resource name="0/material"></resource>		<color name="0/modulate"> 1, 1, 1, 1 </color>
+		<rect2 name="0/region"> 0, 0, 32, 32 </rect2>
+		<vector2 name="0/occluder_offset"> 16, 16 </vector2>
+		<resource name="0/occluder" resource_type="OccluderPolygon2D" path="local://2">  </resource>
+		<vector2 name="0/navigation_offset"> 16, 16 </vector2>
+		<resource name="0/navigation"></resource>		<vector2 name="0/shape_offset"> 16, 16 </vector2>
+		<array name="0/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://3">  </resource>
+		</array>
+		<vector2 name="0/one_way_collision_direction"> 0, 0 </vector2>
+		<real name="0/one_way_collision_max_depth"> 0 </real>
+		<string name="1/name"> "tileBlock" </string>
+		<resource name="1/texture" external="1">  </resource>
+		<vector2 name="1/tex_offset"> 0, 0 </vector2>
+		<resource name="1/material"></resource>		<color name="1/modulate"> 1, 1, 1, 1 </color>
+		<rect2 name="1/region"> 0, 0, 32, 32 </rect2>
+		<vector2 name="1/occluder_offset"> 16, 16 </vector2>
+		<resource name="1/occluder"></resource>		<vector2 name="1/navigation_offset"> 16, 16 </vector2>
+		<resource name="1/navigation" resource_type="NavigationPolygon" path="local://1">  </resource>
+		<vector2 name="1/shape_offset"> 0, 0 </vector2>
+		<array name="1/shapes" len="0" shared="false">
+		</array>
+		<vector2 name="1/one_way_collision_direction"> 0, 0 </vector2>
+		<real name="1/one_way_collision_max_depth"> 0 </real>
+
+	</main_resource>
+</resource_file>

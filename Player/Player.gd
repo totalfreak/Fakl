@@ -22,6 +22,7 @@ onready var timer = Timer.new()
 
 const MOVE_SPEED = 40
 const RUN_MULT = 2
+var health = 10
 
 func _ready():
 	set_fixed_process(true)
@@ -83,8 +84,6 @@ func _input(event):
 
 func shoot():
 	torch.fuel -= 0.1
-	if torch.fuel <= 0.3:
-		dropTorch()
 	var bullet = load("res://Projectile/Bullet.tscn").instance()
 	bullet.get_node("Particles2D").set_param(11, fuel/2.0)
 	#var bi = bullet.instance()
@@ -94,8 +93,9 @@ func shoot():
 	bullet.set_pos(torchPos.get_global_pos())
 	var rigidbody_vector = (get_global_mouse_pos() - torchPos.get_global_pos()).normalized()
 	bullet.apply_impulse(bullet.get_pos(), rigidbody_vector*shootSpeed)
+	torch.get_node("audio").play("fire")
 	hasShot = true
-	timer.set_wait_time( 1 )
+	timer.set_wait_time( 0.5 )
 	timer.start()
 
 func _on_timer_timeout():
@@ -110,3 +110,12 @@ func dropTorch():
 	get_node("Light2D").set_texture_scale(0.4)
 	torch.pickedUp = false
 	hasTorch = false
+
+func damage(dmg):
+	health-=dmg
+	if health <= 0:
+		die()
+
+func die():
+	#self.queue_free()
+	pass
